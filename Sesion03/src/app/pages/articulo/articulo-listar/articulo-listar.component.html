@@ -1,0 +1,89 @@
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="col-6">
+            <h3>Lista de Artículos</h3>
+          </div>
+          <div class="col-12">
+            <div class="card-footer clearfix">
+              <button type="button" class="btn btn-primary float-right" [routerLink]="['/pages/articulocrear']">
+                <i class="fas fa-plus"></i> Agregar
+              </button>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="example2" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Nombre</th>
+                  <th>Precio</th>
+                  <th>Costo</th>
+                  <th>Fecha Registro</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of listararticulos">
+                  <th>{{ item.idArticulo }}</th>
+                  <th>{{ item.nombre }}</th>
+                  <th>{{ item.precio }}</th>
+                  <th>{{ item.costo }}</th>
+                  <th>{{ item.fechaRegistro }}</th>
+                  <th>
+                    <a [routerLink]="['/pages/articuloeditar', item.idArticulo]"
+                      >Editar</a
+                    >|<a [routerLink]="['/pages/articuloeliminar', item.idArticulo]"
+                      >Eliminar</a
+                    >
+                  </th>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Código</th>
+                  <th>Nombre</th>
+                  <th>Precio</th>
+                  <th>Costo</th>
+                  <th>Fecha Registro</th>
+                </tr>
+              </tfoot>
+            </table>
+            <button class="btn btn-primary" (click)="cambiarPagina(-1)">
+              Anterior
+            </button>
+            <label>{{ pagActual }}</label>
+            <button class="btn btn-primary" (click)="cambiarPagina(1)">
+              Siguiente
+            </button>
+
+            <mat-paginator
+              [length]="totalReg"
+              [pageSize]="regXPag"
+              [pageSizeOptions]="pageSizeOptions"
+              (page)="handlePages($event)"
+              aria-label="Select page"
+            >
+            </mat-paginator>
+
+            <div *ngIf="pageEvent">
+              <h5>Page Change Event Properties</h5>
+              <div>List length: {{ pageEvent.length }}</div>
+              <div>Page size: {{ pageEvent.pageSize }}</div>
+              <div>Page index: {{ pageEvent.pageIndex }}</div>
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>
